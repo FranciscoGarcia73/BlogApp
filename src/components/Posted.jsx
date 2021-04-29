@@ -1,7 +1,7 @@
 import React from "react";
 
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
@@ -11,13 +11,20 @@ import "./styles/blog-min.css";
 
 function Posted() {
   const { register, handleSubmit } = useForm();
+  const routerHistory = useHistory();
 
-  function enviarCliente(data) {
-    console.log(data);
+  function enviarPost(data) {
     axios
-      .post("http://localhost:3000/api/blogs", data)
+      .post("http://localhost:3000/api/blogs", data, {
+        headers: {
+          authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvSWQiOiJGcmFuIiwiY2FkdWNhIjoxNjIyMjI5MDM1LCJpYXQiOjE2MTk2MzcwMzV9.CjkOxlicrjUo5J1yRqSKGPXG8RwnwyS_vD27PFbaIi8",
+        },
+      })
+
       .then((response) => {
         console.log(response);
+        routerHistory.push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -77,7 +84,7 @@ function Posted() {
               name="sentMessage"
               id="contactForm"
               novalidate
-              onSubmit={handleSubmit(enviarCliente)}
+              onSubmit={handleSubmit(enviarPost)}
             >
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls">

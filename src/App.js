@@ -10,18 +10,18 @@ import Posted from './components/Posted';
 
 function App() {
 
-   const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);
 
-  useEffect(() => {
+ useEffect(() => {
     axios
       .get("http://localhost:3000/api/blogs", {
         headers: {
           authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvSWQiOiJGcmFuIiwiY2FkdWNhIjoxNjIwMzE1MTk2LCJpYXQiOjE2MTk0NTExOTZ9.Otc4JL__2dsBAC2_4fRs1Dne3M7IRv-jqG3JZ8APCfc",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvSWQiOiJGcmFuIiwiY2FkdWNhIjoxNjIyMjI5MDM1LCJpYXQiOjE2MTk2MzcwMzV9.CjkOxlicrjUo5J1yRqSKGPXG8RwnwyS_vD27PFbaIi8",
         },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
         setBlogs(response.data);
       })
       .catch((error) => {
@@ -30,14 +30,13 @@ function App() {
   }, []);
 
 
-
   return (
     <BrowserRouter>
       <div className="App">
         <Switch>
           <Route path="/" exact >
              <Suspense fallback={<div>Cargando...</div>}>
-              <ListaBlogs blogs={blogs}/>
+              <ListaBlogs />
             </Suspense>
           </Route>
           <Route path="/blogs/:idBlog" exact>
@@ -50,6 +49,7 @@ function App() {
               <Posted />
             </Suspense>
           </Route>
+          <Route render={() => <h1>404 Not Found</h1>} />
         </Switch>
       </div>
     </BrowserRouter>

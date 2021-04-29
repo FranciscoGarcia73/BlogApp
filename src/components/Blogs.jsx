@@ -2,17 +2,43 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router";
 
-import background from "../images/posted.jpg";
+import cocina from "../images/cocina.jpg";
+import programacion from "../images/programacion.jpg";
+import deportes from "../images/deportes.jpg";
+import videojuegos from "../images/videojuegos.jpg";
+import motor from "../images/motor.jpg";
+import defecto from "../images/defecto.jpg";
+
 import "./styles/blog.css";
 import "./styles/blog-min.css";
 
 function Blogs(props) {
   const value = useParams();
-  console.log(value.idBlog);
-  console.log(props.blogs);
   const blogSelect = props.blogs.filter((blog) => blog._id == value.idBlog);
   const blog = blogSelect[0];
-  console.log(blog);
+  let background = "";
+
+  switch (blog.categoria.toLowerCase()) {
+    case "cocina":
+      background = cocina;
+      break;
+    case "programacion":
+      background = programacion;
+      break;
+    case "deportes":
+      background = deportes;
+      break;
+    case "videojuegos":
+      background = videojuegos;
+      break;
+    case "motor":
+      background = motor;
+      break;
+    default:
+      background = defecto;
+      break;
+  }
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
