@@ -8,6 +8,7 @@ import ListaBlogs from './components/ListaBlogs';
 import Blogs from './components/Blogs';
 import Posted from './components/Posted';
 
+
 function App() {
 
   const [blogs, setBlogs] = useState([]);
@@ -27,7 +28,7 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [blogs]);
 
 
   return (
@@ -36,7 +37,7 @@ function App() {
         <Switch>
           <Route path="/" exact >
              <Suspense fallback={<div>Cargando...</div>}>
-              <ListaBlogs />
+              <ListaBlogs blogs={blogs}/>
             </Suspense>
           </Route>
           <Route path="/blogs/:idBlog" exact>
