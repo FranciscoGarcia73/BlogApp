@@ -7,12 +7,13 @@ import './App.css';
 import ListaBlogs from './components/ListaBlogs';
 import Blogs from './components/Blogs';
 import Posted from './components/Posted';
+import { set } from 'react-hook-form';
 
 
 function App() {
 
   const [blogs, setBlogs] = useState([]);
-
+  
  useEffect(() => {
     axios
       .get("http://localhost:3000/api/blogs", {
@@ -28,8 +29,8 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, [blogs]);
-
+ }, []);
+  
 
   return (
     <BrowserRouter>
@@ -42,7 +43,7 @@ function App() {
           </Route>
           <Route path="/blogs/:idBlog" exact>
             <Suspense fallback={<div>Cargando...</div>}>
-              <Blogs blogs={blogs}/>
+              <Blogs blogs={blogs} />
             </Suspense>
           </Route>
            <Route path="/posted" exact>
