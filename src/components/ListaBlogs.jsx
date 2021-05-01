@@ -6,26 +6,7 @@ import background from "../images/home-bg.jpg";
 import "./styles/blog.css";
 import "./styles/blog-min.css";
 
-function ListaBlogs() {
-  const [blogs, setBlogs] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/blogs", {
-        headers: {
-          authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvSWQiOiJGcmFuIiwiY2FkdWNhIjoxNjIyMjI5MDM1LCJpYXQiOjE2MTk2MzcwMzV9.CjkOxlicrjUo5J1yRqSKGPXG8RwnwyS_vD27PFbaIi8",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setBlogs(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
+function ListaBlogs({ blogs }) {
   return (
     <div>
       <nav

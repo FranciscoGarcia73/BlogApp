@@ -9,7 +9,7 @@ import background from "../images/newposted.jpg";
 import "./styles/blog.css";
 import "./styles/blog-min.css";
 
-function Posted() {
+function Posted({ onEnv }) {
   const { register, handleSubmit } = useForm();
   const routerHistory = useHistory();
 
@@ -23,6 +23,7 @@ function Posted() {
       })
       .then((response) => {
         console.log(response);
+        onEnv();
         routerHistory.push("/");
       })
       .catch((error) => {

@@ -13,6 +13,11 @@ import { set } from 'react-hook-form';
 function App() {
 
   const [blogs, setBlogs] = useState([]);
+  const [env, setEnv]= useState(false);
+
+  const onEnv =()=> {
+    setEnv(!env);
+  }
   
  useEffect(() => {
     axios
@@ -29,7 +34,7 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
- }, []);
+ }, [env]);
   
 
   return (
@@ -48,7 +53,7 @@ function App() {
           </Route>
            <Route path="/posted" exact>
             <Suspense fallback={<div>Cargando...</div>}>
-              <Posted />
+              <Posted onEnv={onEnv}/>
             </Suspense>
           </Route>
           <Route render={() => <h1>404 Not Found</h1>} />
